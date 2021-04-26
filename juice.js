@@ -3,15 +3,19 @@ let div = document.createElement('div');
 const btn = document.getElementById('btn');
 //Variable objeto para color de cada div al pasar el mouse
 let objeto;
+let cajitas;
 
 
-//Formulario para pedir el número de cuadros que el usuario quiera
+//Código nuevo
 
-let cajitas = prompt("Ingrese la cantidad de cajas que desea",0);
+let button = document.querySelector('#button');
+button.addEventListener("click", function(e){
+    let input = document.querySelector('#input');
+    cajitas = input.value;
+    crearCajas();
+    input.value = "";
+});
 
-
-//Llamada de la función
-crearCajas();
 
 
 //Función para crear la cantidad de cajas que el usuario requiera
@@ -28,10 +32,13 @@ function crearCajas(){
     div.style.float = "left";
     div.style.margin = "0px";
     div.style.border = "0.5px solid rgba(0, 0, 0, 0.8)";
+    div.setAttribute('class', 'first');
     contenedor.appendChild(div);
-    }
-    
+    }    
 }
+
+
+//Evento de escucha para pintar cada div
 
 contenedor.addEventListener('mouseover', function (e){
     objeto = e.target;
@@ -42,13 +49,23 @@ contenedor.addEventListener('mouseover', function (e){
 });
 
 
-//Función de escucha para resetear los elementos
+//Botón de escucha para resetear los elementos
 
 btn.addEventListener('click', function (e){
     //Código de Stackoverflow
     //TODO: Consultar los nuevos métodos o funciones aprendidas
     let cajas = document.getElementsByClassName("vanilla")
+    let firstCajas = document.getElementsByClassName('first');
     Array.prototype.forEach.call(cajas, function(cajas) {
       cajas.style.backgroundColor = null;
+      cajas.style.width = "";
+      cajas.style.height = "";
+      cajas.style.border = "";
+    });
+    Array.prototype.forEach.call(firstCajas, function(firstCajas) {
+      firstCajas.style.border = "";
+      firstCajas.style.width = "";
+      firstCajas.style.height = "";
+      firstCajas.style.border = "";
     });
 });
