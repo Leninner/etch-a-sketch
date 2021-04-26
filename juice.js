@@ -1,38 +1,54 @@
 const contenedor = document.querySelector('#contenedor');
 let div = document.createElement('div');
 const btn = document.getElementById('btn');
-btn.style.backgroundColor  = "black";
-btn.style.width = "150px";
-btn.style.marginLeft = "600px";
-btn.style.marginTop = "50px";
+//Variable objeto para color de cada div al pasar el mouse
+let objeto;
 
-btn.addEventListener('click', function (e){
-    console.log(e.target);
-});
 
+//Formulario para pedir el número de cuadros que el usuario quiera
+
+let cajitas = prompt("Ingrese la cantidad de cajas que desea",0);
+
+
+//Llamada de la función
 crearCajas();
+
+
+//Función para crear la cantidad de cajas que el usuario requiera
 
 function crearCajas(){
     //Creamos la manera de hacer los cuadros que queramos
-    //Basta con ajustar el tamaño del contenedor general y 
+    //Ajustamos el tamaño del contenedor general y 
     //hacer operaciones simples para encontrar el nuevo
     //tamaño de los child divs.
-    for(let i=0; i<(16*16); i++){
+    for(let i=0; i<(cajitas**2); i++){
     div = document.createElement('div');
-    div.style.width = ((400/16)-2)+"px";
-    div.style.height = ((400/16)-2)+"px";
-    div.style.backgroundColor = "white";
+    div.style.width = ((400/cajitas)-2)+"px";
+    div.style.height = ((400/cajitas)-2)+"px";
     div.style.float = "left";
     div.style.margin = "0px";
     div.style.border = "0.5px solid rgba(0, 0, 0, 0.8)";
     contenedor.appendChild(div);
     }
+    
 }
 
 contenedor.addEventListener('mouseover', function (e){
-    e.target.style.backgroundColor = "Yellow";
-    // console.log(div);
-    // console.log(e.target);
+    objeto = e.target;
+    objeto.style.backgroundColor = "Yellow";
+    //Añadimos la clase 'Vanilla' a cada div con nuevo color
+    //para luego poder resetear y se actualice al color base
+    objeto.setAttribute('class', 'vanilla');
 });
 
 
+//Función de escucha para resetear los elementos
+
+btn.addEventListener('click', function (e){
+    //Código de Stackoverflow
+    //TODO: Consultar los nuevos métodos o funciones aprendidas
+    let cajas = document.getElementsByClassName("vanilla")
+    Array.prototype.forEach.call(cajas, function(cajas) {
+      cajas.style.backgroundColor = null;
+    });
+});
