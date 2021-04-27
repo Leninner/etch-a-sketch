@@ -11,11 +11,22 @@
     <header>
         <h1>ETCH - A - SKETCH</h1>
     </header>
-    <div>
-            <input type="number" placeholder="0" id="input" size="20">
+    <div id="form">
+        <div>
+            <label for="">Cantidad de Cuadros: <input type="number" placeholder="0" id="input" size="20"></label>
             <button id="button" type="button">PROBAR</button>
+        </div>
+        <button id="btn">REINICIAR</button>
     </div>
-    <button id="btn">REINICIAR</button>
+    <div id="color">
+        <label for="">Selecciona un color: </label>
+        <nav>
+            <ul>
+                <li><a id="RGB">Aleatorio</a></li>
+                <li><a id="black">Negro</a></li>
+            </ul>
+        </nav>
+    </div>
     <div id="separador"></div>
     <div id="contenedor"></div>
     <script src="juice.js"></script>

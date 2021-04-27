@@ -1,19 +1,36 @@
 const contenedor = document.querySelector('#contenedor');
 let div = document.createElement('div');
 const btn = document.getElementById('btn');
-//Variable objeto para color de cada div al pasar el mouse
 let objeto;
 let cajitas;
+let color;
+const rgb = document.querySelector('#RGB');
+const black = document.querySelector('#black');
+
+rgb.addEventListener('click', function(e){
+  colorHEX();
+});
+
+black.addEventListener('click', function(e){
+  color = "black";
+  return color;
+});
 
 
-//Código nuevo
 
 let button = document.querySelector('#button');
 button.addEventListener("click", function(e){
     let input = document.querySelector('#input');
-    cajitas = input.value;
-    crearCajas();
-    input.value = "";
+    if(input.value >= 0 && input.value <= 100){
+      cajitas = input.value;
+      
+      crearCajas();
+      input.value = "";
+    }
+    else{
+      input.value = "";
+      alert('Ingresa un número entre 0 y 100');
+    }
 });
 
 
@@ -21,14 +38,10 @@ button.addEventListener("click", function(e){
 //Función para crear la cantidad de cajas que el usuario requiera
 
 function crearCajas(){
-    //Creamos la manera de hacer los cuadros que queramos
-    //Ajustamos el tamaño del contenedor general y 
-    //hacer operaciones simples para encontrar el nuevo
-    //tamaño de los child divs.
     for(let i=0; i<(cajitas**2); i++){
     div = document.createElement('div');
-    div.style.width = ((400/cajitas)-2)+"px";
-    div.style.height = ((400/cajitas)-2)+"px";
+    div.style.width = ((350/cajitas)-2)+"px";
+    div.style.height = ((350/cajitas)-2)+"px";
     div.style.float = "left";
     div.style.margin = "0px";
     div.style.border = "0.5px solid rgba(0, 0, 0, 0.8)";
@@ -42,9 +55,7 @@ function crearCajas(){
 
 contenedor.addEventListener('mouseover', function (e){
     objeto = e.target;
-    objeto.style.backgroundColor = "Yellow";
-    //Añadimos la clase 'Vanilla' a cada div con nuevo color
-    //para luego poder resetear y se actualice al color base
+    objeto.style.backgroundColor = color;
     objeto.setAttribute('class', 'vanilla');
 });
 
@@ -52,7 +63,6 @@ contenedor.addEventListener('mouseover', function (e){
 //Botón de escucha para resetear los elementos
 
 btn.addEventListener('click', function (e){
-    //Código de Stackoverflow
     //TODO: Consultar los nuevos métodos o funciones aprendidas
     let cajas = document.getElementsByClassName("vanilla")
     let firstCajas = document.getElementsByClassName('first');
@@ -69,3 +79,23 @@ btn.addEventListener('click', function (e){
       firstCajas.style.border = "";
     });
 });
+
+
+//Obtener un color RGB 
+
+function generarLetra(){
+	let letras = ["a","b","c","d","e","f","0","1","2","3","4","5","6","7","8","9"];
+	let numero = (Math.random()*15).toFixed(0);
+	return letras[numero];
+}
+	
+function colorHEX(){
+	color = "";
+	for(let i=0;i<6;i++){
+		color = color + generarLetra() ;
+	}
+  color = "#"+color;
+	return color;
+}
+
+console.log(colorHEX());
