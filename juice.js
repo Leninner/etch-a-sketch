@@ -1,11 +1,13 @@
-const contenedor = document.querySelector('#contenedor');
-let div = document.createElement('div');
-const btn = document.getElementById('btn');
-let objeto;
-let cajitas;
-let color;
-const rgb = document.querySelector('#RGB');
-const black = document.querySelector('#black');
+const contenedor = document.querySelector('#contenedor'),
+	btn = document.getElementById('btn'),
+    rgb = document.querySelector('#RGB'),
+    black = document.querySelector('#black');
+
+let div = document.createElement('div'),
+	objeto,
+	cajitas,
+	color,
+	button = document.querySelector('#button');
 
 rgb.addEventListener('click', function(e){
   colorHEX();
@@ -16,9 +18,6 @@ black.addEventListener('click', function(e){
   return color;
 });
 
-
-
-let button = document.querySelector('#button');
 button.addEventListener("click", function(e){
     let input = document.querySelector('#input');
     if(input.value >= 0 && input.value <= 100){
